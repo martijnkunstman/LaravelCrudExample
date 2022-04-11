@@ -1,0 +1,23 @@
+PHP v8.1.2
+Composer v2.2.5
+Laravel v9.1.4
+terminal -> composer create-project laravel/laravel LaravelCrudExample
+create and run mysqldatabase 'laravelcrudexample' utf8mb4_unicode_ci
+change database name to 'laravelcrudexample' in .env file
+terminal -> php artisan serve
+ctrl + c to quit server
+terminal -> php artisan migrate
+terminal -> php artisan make:model Category -a
+terminal -> php artisan make:model Project -a
+terminal -> php artisan migrate:fresh
+edit migrations of Category
+edit factory of Category
+edit seeder
+edit StoreCategoryRequest.php (set true to false)
+edit UpdateCategoryRequest.php (set true to false)
+edit Category.php (model)
+terminal -> php artisan migrate:fresh
+terminal -> php artisan db:seed
+make routes
+make views
+edit CategoryController.php
