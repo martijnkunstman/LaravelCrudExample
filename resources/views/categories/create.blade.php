@@ -8,8 +8,17 @@
 </head>
 
 <body class="antialiased">
-    <div>category - create</div>
-    <form method="post" action="{{ route('category.store') }}">
+<div><p>Category - Create</p></div>
+    <div>
+        <p><a href="{{ route('categories.index') }}">Back</a></p>
+    </div>    
+    @if ($errors->any())
+        <div><p>Errors:</p></div>
+            @foreach ($errors->all() as $error)
+            <div><p>{{ $error }}</p></div>
+            @endforeach
+    @endif
+    <form method="post" action="{{ route('categories.store') }}">
         @csrf
         <label for="name">name</label>
         <input type="text" id="name" name="name"><br>

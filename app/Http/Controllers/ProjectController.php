@@ -15,7 +15,8 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        //
+        $data = Project::all();
+        return view('projects.index', compact('data'));
     }
 
     /**
@@ -25,7 +26,7 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        //
+        return view('projects.create');
     }
 
     /**
@@ -36,7 +37,23 @@ class ProjectController extends Controller
      */
     public function store(StoreProjectRequest $request)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'description' => 'required'
+        ]);
+        $project = new Project;
+        if ($request->active == NULL) {
+            $request->merge([
+                'active' => 0,
+            ]);
+        } else {
+            $request->merge([
+                'active' => 1,
+            ]);
+        }
+        $project->create($request->all());
+        return redirect()->route('projects.index')
+            ->with('success', 'Project created successfully.');
     }
 
     /**
@@ -47,7 +64,7 @@ class ProjectController extends Controller
      */
     public function show(Project $project)
     {
-        //
+        return view('projects.show',compact('project'));
     }
 
     /**
@@ -58,7 +75,7 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
-        //
+        return view('projects.edit',compact('project'));
     }
 
     /**
@@ -70,7 +87,26 @@ class ProjectController extends Controller
      */
     public function update(UpdateProjectRequest $request, Project $project)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'description' => 'required',
+
+        ]);
+
+        if ($request->active == NULL) {
+            $request->merge([
+                'active' => 0,
+            ]);
+        } else {
+            $request->merge([
+                'active' => 1,
+            ]);
+        }     
+  
+        $project->update($request->all());
+    
+        return redirect()->route('projects.index')
+                        ->with('success','Project updated successfully');
     }
 
     /**
@@ -81,6 +117,9 @@ class ProjectController extends Controller
      */
     public function destroy(Project $project)
     {
-        //
+        $project->delete();
+
+        return redirect()->route('projects.index')
+            ->with('success', 'Project deleted successfully');
     }
 }
