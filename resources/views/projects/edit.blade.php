@@ -8,15 +8,21 @@
 </head>
 
 <body class="antialiased">
-    <div><p>Project - Edit</p></div>
+    <div>
+        <p>Project - Edit</p>
+    </div>
     <div>
         <p><a href="{{ route('projects.index') }}">Back</a></p>
-    </div>    
+    </div>
     @if ($errors->any())
-        <div><p>Errors:</p></div>
-            @foreach ($errors->all() as $error)
-            <div><p>{{ $error }}</p></div>
-            @endforeach
+    <div>
+        <p>Errors:</p>
+    </div>
+    @foreach ($errors->all() as $error)
+    <div>
+        <p>{{ $error }}</p>
+    </div>
+    @endforeach
     @endif
     <form method="post" action="{{ route('projects.update', $project->id) }}">
         @csrf
@@ -25,8 +31,19 @@
         <input type="text" id="name" name="name" value="{{ $project->name }}"><br>
         <label for="description">description</label>
         <input type="text" id="description" name="description" value="{{ $project->description }}"><br>
+
+        <label for="category">category</label>
+        <select type="text" id="category" name="category_id">
+            <option value="0" {{ ( $project->id == 0) ? 'selected' : '' }}>none</option>
+            @foreach ($categories as $category => $value)
+            <option value="{{ $value->id }}" {{ ( $value->id == $project->category_id) ? 'selected' : '' }}>
+                {{ $value->name }}
+            </option>
+            @endforeach
+        </select>
+
         <label for="active">active</label>
-        <input type="checkbox" id="active" name="active" {{$project->active===1?"checked":""}} ><br>
+        <input type="checkbox" id="active" name="active" {{$project->active===1?"checked":""}}><br>
         <button type="submit" class="btn btn-success">edit</button>
     </form>
 </body>

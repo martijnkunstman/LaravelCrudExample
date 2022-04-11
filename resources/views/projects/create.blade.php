@@ -24,6 +24,17 @@
         <input type="text" id="name" name="name"><br>
         <label for="description">description</label>
         <input type="text" id="description" name="description"><br>
+
+        <label for="category">category</label>
+        <select type="text" id="category" name="category_id">
+        <option value="0">none</option>
+        @foreach ($categories as $category => $value)
+        <option value="{{ $value->id }}"> 
+            {{ $value->name }} 
+        </option>
+        @endforeach 
+        </select>       
+        <br>
         <label for="active">active</label>
         <input type="checkbox" id="active" name="active"><br>
         <button type="submit" class="btn btn-success">create</button>

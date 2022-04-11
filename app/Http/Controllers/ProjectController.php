@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Project;
+use App\Models\Category;
 use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
 
@@ -16,7 +17,8 @@ class ProjectController extends Controller
     public function index()
     {
         $data = Project::all();
-        return view('projects.index', compact('data'));
+        $categories = Category::all();
+        return view('projects.index', compact('data'), compact('categories'));
     }
 
     /**
@@ -26,7 +28,8 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        return view('projects.create');
+        $categories = Category::all();
+        return view('projects.create', compact('categories'));
     }
 
     /**
@@ -39,7 +42,8 @@ class ProjectController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'description' => 'required'
+            'description' => 'required',
+            'category_id' => 'required',
         ]);
         $project = new Project;
         if ($request->active == NULL) {
@@ -64,7 +68,8 @@ class ProjectController extends Controller
      */
     public function show(Project $project)
     {
-        return view('projects.show',compact('project'));
+        $categories = Category::all();
+        return view('projects.show',compact('project'), compact('categories'));
     }
 
     /**
@@ -75,7 +80,8 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
-        return view('projects.edit',compact('project'));
+        $categories = Category::all();
+        return view('projects.edit',compact('project'), compact('categories'));
     }
 
     /**
@@ -90,6 +96,7 @@ class ProjectController extends Controller
         $request->validate([
             'name' => 'required',
             'description' => 'required',
+            'category_id' => 'required',
 
         ]);
 
