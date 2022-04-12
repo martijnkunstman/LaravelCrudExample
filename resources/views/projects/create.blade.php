@@ -1,22 +1,21 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Laravel</title>
-</head>
-
-<body class="antialiased">
-<div><p>Project - Create</p></div>
+<x-app-layout>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            {{ __('Project - Create') }}
+        </h2>
+    </x-slot>
     <div>
         <p><a href="{{ route('projects.index') }}">Back</a></p>
-    </div>    
+    </div>
     @if ($errors->any())
-        <div><p>Errors:</p></div>
-            @foreach ($errors->all() as $error)
-            <div><p>{{ $error }}</p></div>
-            @endforeach
+    <div>
+        <p>Errors:</p>
+    </div>
+    @foreach ($errors->all() as $error)
+    <div>
+        <p>{{ $error }}</p>
+    </div>
+    @endforeach
     @endif
     <form method="post" action="{{ route('projects.store') }}" enctype='multipart/form-data'>
         @csrf
@@ -34,18 +33,16 @@
 
         <label for="category">category</label>
         <select type="text" id="category" name="category_id">
-        <option value="0">none</option>
-        @foreach ($categories as $category => $value)
-        <option value="{{ $value->id }}"> 
-            {{ $value->name }} 
-        </option>
-        @endforeach 
-        </select>       
+            <option value="0">none</option>
+            @foreach ($categories as $category => $value)
+            <option value="{{ $value->id }}">
+                {{ $value->name }}
+            </option>
+            @endforeach
+        </select>
         <br>
         <label for="active">active</label>
         <input type="checkbox" id="active" name="active"><br>
         <button type="submit" class="btn btn-success">create</button>
     </form>
-</body>
-
-</html>
+</x-app-layout>
