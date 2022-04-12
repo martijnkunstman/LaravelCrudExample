@@ -13,21 +13,21 @@
     </div>
     @endif
 
-    <table>
-        <tr>
+    <table style="border: 1px solid black;">
+        <tr style="border: 1px solid black;">
             <th>Id</th>
             <th>Name</th>
             <th>Description</th>
+            <th>Active</th>
             <th>Action</th>
         </tr>
         @foreach ($data as $key => $value)
-        <tr>
-            <td>{{ $value->id }}</td>
-            <td>{{ $value->name }}</td>
-            <td>{{ \Str::limit($value->description, 100) }}</td>
-            <td>{{ $value->cat }}</td>
-            <td><input disabled type="checkbox" id="active" name="active" {{$value->active===1?"checked":""}}></td>
-            <td>
+        <tr style="border: 1px solid black;">
+            <td style="border: 1px solid black;">{{ $value->id }}</td>
+            <td style="border: 1px solid black;">{{ $value->name }}</td>
+            <td style="border: 1px solid black;">{{ \Str::limit($value->description, 100) }}</td>
+            <td style="border: 1px solid black;"><input disabled type="checkbox" id="active" name="active" {{$value->active===1?"checked":""}}></td>
+            <td style="border: 1px solid black;">
                 <form action="{{ route('categories.destroy',$value->id) }}" method="POST">
                     <a class="btn btn-info" href="{{ route('categories.show',$value->id) }}">Show</a>
                     <a class="btn btn-primary" href="{{ route('categories.edit',$value->id) }}">Edit</a>

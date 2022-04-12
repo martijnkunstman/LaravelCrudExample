@@ -24,10 +24,6 @@
         <label for="description">description</label>
         <input type="text" id="description" name="description"><br>
 
-
-        <label for="description">description</label>
-        <input type="text" id="description" name="description"><br>
-
         <label for="image">image</label>
         <input type="file" id="image" name="image"><br>
 
