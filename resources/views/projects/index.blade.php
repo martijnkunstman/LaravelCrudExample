@@ -37,7 +37,7 @@
             @endif
             @endforeach
             </td>
-            <td><img src="storage/{{ $value->image }}" style="width:50px; height:50px;"></td>
+            <td><img src="/storage/{{ $value->image }}" style="width:50px; height:50px;"></td>
             <td><input disabled type="checkbox" id="active" name="active" {{$value->active===1?"checked":""}}></td>
             <td>
                 <form action="{{ route('projects.destroy',$value->id) }}" method="POST">

@@ -65,8 +65,8 @@ class ProjectController extends Controller
         $project->image = $fileName;
         $project->active = $request->active;
         $project->save();
-        
-        
+
+
 
         return redirect()->route('projects.index')
             ->with('success', 'Project created successfully.');
@@ -81,7 +81,7 @@ class ProjectController extends Controller
     public function show(Project $project)
     {
         $categories = Category::all();
-        return view('projects.show',compact('project'), compact('categories'));
+        return view('projects.show', compact('project'), compact('categories'));
     }
 
     /**
@@ -93,7 +93,7 @@ class ProjectController extends Controller
     public function edit(Project $project)
     {
         $categories = Category::all();
-        return view('projects.edit',compact('project'), compact('categories'));
+        return view('projects.edit', compact('project'), compact('categories'));
     }
 
     /**
@@ -105,11 +105,11 @@ class ProjectController extends Controller
      */
     public function update(UpdateProjectRequest $request, Project $project)
     {
+
         $request->validate([
             'name' => 'required',
             'description' => 'required',
             'category_id' => 'required',
-
         ]);
 
         if ($request->active == NULL) {
@@ -120,12 +120,22 @@ class ProjectController extends Controller
             $request->merge([
                 'active' => 1,
             ]);
-        }     
-  
-        $project->update($request->all());
-    
+        }
+
+        if ($request->file()) {
+            $fileName = time() . '_' . $request->image->getClientOriginalName();
+            $request->file('image')->storeAs('public', $fileName);
+            $project->image = $fileName;
+        }
+
+        $project->name = $request->name;
+        $project->description = $request->description;
+        $project->category_id = $request->category_id;
+        $project->active = $request->active;
+        $project->save();
+
         return redirect()->route('projects.index')
-                        ->with('success','Project updated successfully');
+            ->with('success', 'Project updated successfully');
     }
 
     /**

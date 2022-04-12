@@ -17,13 +17,16 @@
     </div>
     @endforeach
     @endif
-    <form method="post" action="{{ route('projects.update', $project->id) }}">
+    <form method="post" action="{{ route('projects.update', $project->id) }}" enctype='multipart/form-data'>
         @csrf
         @method('PUT')
         <label for="name">name</label>
         <input type="text" id="name" name="name" value="{{ $project->name }}"><br>
         <label for="description">description</label>
         <input type="text" id="description" name="description" value="{{ $project->description }}"><br>
+
+        <label for="image">image</label>
+        <input type="file" id="image" name="image" value="/storage/{{ $project->image }}"><br>
 
         <label for="category">category</label>
         <select type="text" id="category" name="category_id">
