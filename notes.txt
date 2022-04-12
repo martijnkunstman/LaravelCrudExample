@@ -32,3 +32,10 @@ php artisan breeze:install
 npm install
 npm run dev
 php artisan migrate
+
+
+todo:
+multiple cat selection (implement true one to many relationships)
+multiple file upload and use a new model image (and implement relationships)
+upload progressbar
+remove old images
