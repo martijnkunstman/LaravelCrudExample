@@ -21,3 +21,8 @@ terminal -> php artisan db:seed
 make routes
 make views
 edit CategoryController.php
+
+...
+...
+
+php artisan storage:link

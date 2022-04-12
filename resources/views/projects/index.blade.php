@@ -25,6 +25,9 @@
             <th>Id</th>
             <th>Name</th>
             <th>Description</th>
+            <th>Category</th>
+            <th>Image</th>
+            <th>Active</th>
             <th>Action</th>
         </tr>
         @foreach ($data as $key => $value)
@@ -32,7 +35,14 @@
             <td>{{ $value->id }}</td>
             <td>{{ $value->name }}</td>
             <td>{{ \Str::limit($value->description, 100) }}</td>
-            <td>{{ $value->cat }}</td>
+            <td>              
+            @foreach ($categories as $category => $cat)
+            @if ($cat->id == $value->category_id) 
+            {{$cat->name}}
+            @endif
+            @endforeach
+            </td>
+            <td><img src="storage/{{ $value->image }}" style="width:50px; height:50px;"></td>
             <td><input disabled type="checkbox" id="active" name="active" {{$value->active===1?"checked":""}}></td>
             <td>
                 <form action="{{ route('projects.destroy',$value->id) }}" method="POST">

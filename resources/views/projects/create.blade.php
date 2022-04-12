@@ -18,12 +18,19 @@
             <div><p>{{ $error }}</p></div>
             @endforeach
     @endif
-    <form method="post" action="{{ route('projects.store') }}">
+    <form method="post" action="{{ route('projects.store') }}" enctype='multipart/form-data'>
         @csrf
         <label for="name">name</label>
         <input type="text" id="name" name="name"><br>
         <label for="description">description</label>
         <input type="text" id="description" name="description"><br>
+
+
+        <label for="description">description</label>
+        <input type="text" id="description" name="description"><br>
+
+        <label for="image">image</label>
+        <input type="file" id="image" name="image"><br>
 
         <label for="category">category</label>
         <select type="text" id="category" name="category_id">

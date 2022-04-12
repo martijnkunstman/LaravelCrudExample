@@ -44,7 +44,9 @@ class ProjectController extends Controller
             'name' => 'required',
             'description' => 'required',
             'category_id' => 'required',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
+
         $project = new Project;
         if ($request->active == NULL) {
             $request->merge([
@@ -55,7 +57,17 @@ class ProjectController extends Controller
                 'active' => 1,
             ]);
         }
-        $project->create($request->all());
+        $fileName = time() . '_' . $request->image->getClientOriginalName();
+        $request->file('image')->storeAs('public', $fileName);
+        $project->name = $request->name;
+        $project->description = $request->description;
+        $project->category_id = $request->category_id;
+        $project->image = $fileName;
+        $project->active = $request->active;
+        $project->save();
+        
+        
+
         return redirect()->route('projects.index')
             ->with('success', 'Project created successfully.');
     }
