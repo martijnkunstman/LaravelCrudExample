@@ -25,8 +25,9 @@
         <label for="description">description</label>
         <input type="text" id="description" name="description" value="{{ $project->description }}"><br>
 
+        <img src="/storage/{{ $project->image }}" style="width:50px; height:50px;">
         <label for="image">image</label>
-        <input type="file" id="image" name="image" value="/storage/{{ $project->image }}"><br>
+        <input type="file" id="image" name="image"><br>
 
         <label for="category">category</label>
         <select type="text" id="category" name="category_id">
